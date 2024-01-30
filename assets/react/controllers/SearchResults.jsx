@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
-import SearchResults from './SearchResults.jsx';
 
-export default function () {
 
-    const [searchTerm, setSearchTerm] = useState('');
+export default function ({searchTerm}) {
+
+    //const [searchTerm, setSearchTerm] = useState('');
   
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
   
@@ -17,17 +17,14 @@ export default function () {
     // Handles error and loading state
     if (error) return <div className='failed'>failed to load</div>;
     if (isValidating) return <div className="Loading">Loading...</div>;
- 
-    function getSearchTerm(value) {
-        setSearchTerm('&title=' + value);
-    }
     
     return  <div>
                 <div className="p5 w-3/4">
-                    <input type="text" name="search" placeholder='Search term here...' onChange={(e) => getSearchTerm(e.target.value)} />
-                </div>
-                <div className="p5 w-3/4">
-                    <SearchResults searchTerm={searchTerm} /> 
+                    <div className="basis-1/4">
+                        {attractions.data && attractions.data.map((attraction) => (
+                            <h1 key={attraction.id}>{attraction.title}</h1>
+                        ))}
+                    </div>
                 </div>
             </div>;
 
