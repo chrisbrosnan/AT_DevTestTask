@@ -1,29 +1,13 @@
 #!/bin/bash
 
-installComposerDependencies() {
-    echo "Installing composer dependencies..."
-    exec composer install
-}
+echo "Installing composer dependencies..."
+composer install
 
-installNpmDependencies() {
-    echo "Installing npm dependencies..."
-    exec npm install
-}
+echo "Installing npm dependencies..."
+npm install
 
-buildAssets() {
-    echo "Building assets..."
-    exec npm run build
-}
+echo "Building assets..."
+npm run build
 
-startServer() {
-    echo "Starting server..."
-    exec symfony server:start
-}
-
-installComposerDependencies
-
-installNpmDependencies
-
-buildAssets
-
-startServer
+echo "Starting server..."
+symfony server:start
