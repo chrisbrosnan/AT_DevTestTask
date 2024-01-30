@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
 
-export default function ({searchTerm}) {
+export default function ({searchTerm, searchGeo}) {
   
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
   
@@ -9,7 +9,7 @@ export default function ({searchTerm}) {
         data: attractions,
         error,
         isValidating,
-    } = useSWR('https://global.atdtravel.com/api/products?geo=en' + searchTerm, fetcher);
+    } = useSWR('https://global.atdtravel.com/api/products?geo=' + searchGeo + searchTerm, fetcher);
 
     // Handles error and loading state
     if (error) return <div className='failed'>No results found</div>;
